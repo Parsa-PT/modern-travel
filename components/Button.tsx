@@ -5,15 +5,16 @@ type ButtonProps ={
     title : string,
     icon? :string,
     variant : string,
+    full? : boolean
 }
 
-const Button = ({title , icon , variant , type} : ButtonProps) => {
+const Button = ({title , icon , variant , type , full} : ButtonProps) => {
   return (
     <div>
-      <button className={`${variant} flexCenter gap-3 rounded-full`} type={type}>
+      <button className={`${variant} flexCenter gap-3 rounded-full ${full && 'w-full'} `} type={type}>
         {icon &&  <Image src={icon} width={24} height={24} alt="icon"/>}
        
-        <label className=" bold-16 whitespace-nowrap">{title}</label>
+        <label className=" bold-16 whitespace-nowrap cursor-pointer">{title}</label>
       </button>
     </div>
   )
