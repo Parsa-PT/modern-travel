@@ -10,7 +10,7 @@ const Navbar = () => {
     <div>
       <nav className='  flex justify-between items-center max-container padding-container relative z-30 py-5'>
         <Link href='/'>
-            <Image src={Logo} height={29} width={74} alt='logo'/>
+            <h1 className='text-xl'>Modern<span className=' text-green-400'>Travel</span></h1>
         </Link>
         <ul className=' hidden h-full gap-12 lg:flex'>
                 {NAV_LINKS.map((item)=>(
