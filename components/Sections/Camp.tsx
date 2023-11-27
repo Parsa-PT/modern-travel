@@ -1,5 +1,10 @@
+'use client'
 import { PEOPLE_URL } from "@/constants"
 import Image from "next/image"
+import {motion} from 'framer-motion'
+import { useEffect } from "react"
+import { useAnimation } from "framer-motion"
+import { useInView } from "react-intersection-observer"
 
 
 type CampProps = {
@@ -11,6 +16,9 @@ type CampProps = {
 
 
 const Campsite =({backgroundimage , title ,subtitle ,peopleEnjoined} : CampProps)=>{
+    
+   
+
     return (
         <div className={` h-full w-full min-w-[1100px] ${backgroundimage} bg-cover bg-no-repeat lg:rounded-r-5xl xl:rounded-5xl`}>
             <div className=" flex h-full flex-col items-start justify-between p-6 lg:px-20 lg:py-10 ">
@@ -29,7 +37,10 @@ const Campsite =({backgroundimage , title ,subtitle ,peopleEnjoined} : CampProps
                     <span className=" flex -space-x-4 overflow-hidden">
                         {PEOPLE_URL.map((url)=>(
                             <>
-                                <Image className=" inline-block h-10 w-10 rounded-full" src={url} key={url} alt="person" width={22} height={22}/>
+                            <div key={url}>
+                            <Image className=" inline-block h-10 w-10 rounded-full" src={url}  alt="person" width={22} height={22}/>
+                            </div>
+
                             </>
                         ))}
                     </span>
@@ -42,15 +53,31 @@ const Campsite =({backgroundimage , title ,subtitle ,peopleEnjoined} : CampProps
     )
 }
 
+
+const squareVariants = {
+    visible: { opacity: 1, scale: 1, transition: { duration: 2 } },
+    hidden: { opacity: 0, scale: 0 }
+  };
+
 const Camp = () => {
+    const controls = useAnimation();
+    const [ref, inView] = useInView();
+  
+    useEffect(() => {
+      if (inView) {
+        controls.start('visible');
+      }
+    }, [controls, inView]);
+
   return (
-    <section className=' 2xl:max-container relative flex flex-col py-10 lg:mb-10 lg:py-20 xl:mb-20'>
+    <section ref={ref} className=' 2xl:max-container relative flex flex-col py-10 lg:mb-10 lg:py-20 xl:mb-20'>
             <div className=' hide-scrollbar flex h-[340px] w-full items-start justify-start gap-8 overflow-x-auto lg:h-[400px] xl:h-[640px] '>
                 <Campsite backgroundimage='bg-bg-img-1' title='Putuk Turuno Camp' subtitle='Prigen , Pasuruan' peopleEnjoined='65+ Joined'/>
                 <Campsite backgroundimage='bg-bg-img-2' title='Mountain View Camp' subtitle='Prigen , Pasuruan' peopleEnjoined='32+ Joined'/>
             </div>
 
-            <div className=" flexEnd mt-10 px-6 lg:-mt-60 lg:mr-6">
+            <motion.div animate={controls} initial="hidden"  variants={squareVariants}
+            className=" flexEnd mt-10 px-6 lg:-mt-60 lg:mr-6">
                     <div className=" bg-green-50 p-8 lg:max-w-[500px] xl:max-w-[734px] xl:rounded-5xl xl:px-16 xl:py-20 relative w-full overflow-hidden rounded-3xl">
                         <h2 className=" regular-24 md:regular-32 2xl:regular-64 capitalize text-white"><strong>Lorem ipsum dolor</strong> sit amet consectetur adipisicing elit</h2>
                         <p className=" regular-14 xl:regular-16 mt-5 text-white">
@@ -58,7 +85,7 @@ const Camp = () => {
                         </p>
                         <Image src='/quote.svg' alt="quote" width={186} height={219} className=" camp-quote"/>
                     </div>
-            </div>
+            </motion.div>
     </section>
   )
 }

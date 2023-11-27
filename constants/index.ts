@@ -62,7 +62,7 @@ export const NAV_LINKS = [
     },
     {
       title: 'Our Community',
-      links: ['Climbing xixixi', 'Hiking hilink', 'Hilink kinthill'],
+      links: ['Climbing west', 'Golibar hilink', 'califor kinthill'],
     },
   ];
   
@@ -70,7 +70,7 @@ export const NAV_LINKS = [
     title: 'Contact Us',
     links: [
       { label: 'Admin Officer', value: '0936767878' },
-      { label: 'Email Officer', value: 'modern.travel@akinthil.com' },
+      { label: 'Email Officer', value: 'modern.travel@modern.com' },
     ],
   };
   

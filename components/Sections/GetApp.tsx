@@ -1,8 +1,30 @@
+'use client'
 import Image from 'next/image'
 import Button from '../Button'
+import {motion} from 'framer-motion'
+import { useEffect } from "react"
+import { useAnimation } from "framer-motion"
+import { useInView } from "react-intersection-observer"
+
+
+
+const squareVariants = {
+    visible: { opacity: 1, y: 0, transition: { duration: 1.5 } },
+    hidden: { opacity: 0, y: 300 }
+  };
 
 
 const GetApp = () => {
+
+    const controls = useAnimation();
+    const [ref, inView] = useInView();
+  
+    useEffect(() => {
+      if (inView) {
+        controls.start('visible');
+      }
+    }, [controls, inView]);
+
   return (
     <section className='flexCenter w-full flex-col pb-[100px]'>
         <div className='get-app'>
@@ -17,9 +39,9 @@ const GetApp = () => {
                 </div>
             </div>
 
-            <div className=' flex flex-1 items-center justify-end'>
+            <motion.div ref={ref}  animate={controls} initial="hidden"  variants={squareVariants} className=' flex flex-1 items-center justify-end'>
                     <Image src='/phones.png' alt='phone' width={550} height={870}/>
-            </div>
+            </motion.div>
         </div>
     </section>
   )

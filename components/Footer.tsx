@@ -1,6 +1,7 @@
 import { FOOTER_CONTACT_INFO, FOOTER_LINKS, SOCIALS } from "@/constants"
 import Link from "next/link"
 import Image from "next/image"
+import rexcode from '../public/Rexcode_logo.png'
 
 
 const Footer = () => {
@@ -14,7 +15,7 @@ const Footer = () => {
                 <div className=" flex flex-wrap gap-10 sm:justify-between md:flex-1">
                     {FOOTER_LINKS.map((item)=>(
                         <>
-                            <FooterColumn title={item.title}>
+                            <FooterColumn key={item.title} title={item.title}>
                                 <ul className=" regular-14 flex flex-col gap4 text-gray-30">
                                     {item.links.map((link)=>(
                                         <>
@@ -64,7 +65,10 @@ const Footer = () => {
             </div>
 
             <div className="border bg-gray-20"/>
-            <p className=" regular-14 w-full text-center ">2023 | Design by Rexcode</p>
+            <div className=" regular-14 w-full flex justify-center items-center">
+                <span>2023 | Design by</span>
+                <Image src={rexcode} className=" -ml-[1.2rem]" alt="rexlogo" width={120} height={50}/>
+            </div>
         </div>
     </footer>
   )

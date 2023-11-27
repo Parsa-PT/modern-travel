@@ -1,5 +1,7 @@
+'use client'
 import Image from "next/image";
 import Button from "../Button";
+import {motion} from 'framer-motion'
 
 const Hero = () => {
   return (
@@ -15,13 +17,13 @@ const Hero = () => {
             height={50}
             className=" absolute -left-[0.30rem] -top-[2rem] w-10 lg:w-[50px]"
           />
-          <h1 className=" bold-52 lg:bold-88">Putuk Truno Camp Area</h1>
-          <p className=" regular-16 mt-6 text-gray-30 xl:max-w-[520px]">
+          <motion.h1 animate={{opacity:100 , x:0}} initial={{opacity:0 , x:-100}} transition={{duration:1.2}} className=" bold-52 lg:bold-88">Putuk Truno Camp Area</motion.h1>
+          <motion.p animate={{opacity:100 , x:0}} initial={{opacity:0 , x:100}} transition={{duration:1.2}} className=" regular-16 mt-6 text-gray-30 xl:max-w-[520px]">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam,
             assumenda. Alias voluptatum, fugiat vitae, similique doloribus
             adipisci, animi obcaecati cum officia deserunt minus suscipit
             consequatur dolorem harum molestias voluptas eos.
-          </p>
+          </motion.p>
 
           <div className="my-11 flex flex-wrap gap-5">
             <div className=" flex items-center gap-2">
@@ -29,13 +31,18 @@ const Hero = () => {
                 .fill(1)
                 .map((_, index) => (
                   <>
-                    <Image
+                  <motion.div   key={index} animate={{opacity:100}} initial={{opacity:0}} transition={{duration:1.2}}>
+
+                  <Image
                       src="/star.svg"
-                      key={index}
+                    
                       width={24}
                       height={24}
                       alt="star"
                     />
+
+                  </motion.div>
+                    
                   </>
                 ))}
             </div>
@@ -60,7 +67,7 @@ const Hero = () => {
         </div>
 
         <div className=" relative flex  flex-1 items-start">
-          <div className=" relative z-20 w-[268px] flex-col gap-8 rounded-3xl bg-green-90 px-7 py-8">
+          <motion.div animate={{scale:1}}  transition={{duration:0.5}} initial={{scale:0}} className=" relative z-20 w-[268px] flex-col gap-8 rounded-3xl bg-green-90 px-7 py-8">
 
 
             <div className=" flex flex-col ">
@@ -83,7 +90,7 @@ const Hero = () => {
             </div>
 
 
-          </div>
+          </motion.div>
         </div>
       </section>
     </div>
